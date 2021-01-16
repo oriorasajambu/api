@@ -1,0 +1,12 @@
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-l
+
+RewriteRule ^login/ controller/login.php [QSA]
+RewriteRule ^pertanyaan/(.*)$ controller/pertanyaan.php?task=$1 [QSA]
+RewriteRule ^siswa/(.*)$ controller/siswa.php?task=$1 [QSA]
+RewriteRule ^solusi/(.*)$ controller/solusi.php?task=$1 [QSA]
+RewriteRule ^guru/(.*)$ controller/guru.php?task=$1 [QSA]
+RewriteRule ^pelajaran/(.*)$ controller/pelajaran.php?task=$1 [QSA]
+RewriteRule ^topup/(.*)$ controller/topup.php?task=$1 [QSA]
