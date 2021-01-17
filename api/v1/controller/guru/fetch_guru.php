@@ -34,7 +34,7 @@
 
       if($statement->execute()){
         $result = $statement->get_result();
-        GetJSON($result, "user", "list");
+        GetJSON($result, "data", "list");
       }
       else GetStatement($statement);
     }
@@ -58,7 +58,7 @@
     WHERE login.role = 'guru'";
 
     $result = $connection->query($query);
-    GetJSON($result, "user", "list");
+    GetJSON($result, "data", "list");
   }
 
  ?>

@@ -6,6 +6,6 @@
   $query =
   "SELECT * FROM `tb_mata_pelajaran`";
   $result = $connection->query($query);
-  GetJSON($result, "pelajaran", "list");
+  GetJSON($result, "data", "list");
 
  ?>

@@ -21,7 +21,7 @@
 
     $result = $statement->get_result();
 
-    GetJSON($result, "user");
+    GetJSON($result, "data");
 
   }
 

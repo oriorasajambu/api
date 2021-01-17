@@ -50,9 +50,16 @@
       else GetStatement($statement);
     }
     else {
-      echo $bukti_pembayaran["message"];
+      $code = http_response_code();
+      $message = GetMessage($code);
+      $json = array(
+        'http_code'=>$code,
+        'message'=>$message,
+        'status'=>$bukti_pembayaran['status'],
+        'error'=>$bukti_pembayaran['message']
+      );
+      echo json_encode($json);
     }
-
 
   }
 

@@ -30,7 +30,7 @@
     ORDER BY uploaded_at DESC";
 
     $result = $connection->query($query);
-    GetJSON($result, "user", "list");
+    GetJSON($result, "data", "list");
   }
 
   $connection->close();
