@@ -1,11 +1,17 @@
 <?php
 
   $config = parse_ini_file('../config.ini');
+
+  $database_host = "localhost";
+  $username = "root";
+  $password = "";
+  $database = "db_tanyapr";
+
   $connection = new mysqli(
-    $config['database_host'],
-    $config['username'],
-    $config['password'],
-    $config['database']
+    $database_host,
+    $username,
+    $password,
+    $database
   );
 
   if($connection->connect_error){
