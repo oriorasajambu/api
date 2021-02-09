@@ -14,6 +14,7 @@
       sekolah,
       kelas,
       email,
+      token,
       login.created,
       login.role,
       siswa.coin
@@ -21,19 +22,18 @@
     INNER JOIN tb_siswa AS siswa
     	ON siswa.username = login.username
     WHERE
-      (login.username LIKE CONCAT('%', ?, '%') OR
-      nama_siswa LIKE CONCAT('%', ?, '%') ) AND
+      login.username = ? AND
       login.role = 'siswa'";
 
     if($statement = $connection->prepare($query)){
       $statement->bind_param(
-        "ss",
-        $param, $param
+        "s",
+        $param
       );
 
       if($statement->execute()){
         $result = $statement->get_result();
-        GetJSON($result, "data", "list");
+        GetJSON($result, "data");
       }
       else GetStatement($statement);
     }
@@ -48,6 +48,7 @@
       sekolah,
       kelas,
       email,
+      token,
       login.created,
       login.role,
       siswa.coin

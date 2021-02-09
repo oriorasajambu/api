@@ -16,7 +16,7 @@
       require_once "$path/delete_siswa.php";
       break;
     case 'update':
-      require_once "$path/update_Siswa.php";
+      require_once "$path/update_siswa.php";
       break;
     case 'show':
       require_once "$path/fetch_siswa.php";

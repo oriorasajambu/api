@@ -58,6 +58,25 @@
     else $result = GetStatement($statement);
 
   }
+  else if(isset($_POST['username']) && $_POST['coin_value']){
+
+    $username = $_POST['username'];
+    $coinValue = $_POST['coin_value'];
+
+    $query = "UPDATE tb_siswa SET coin = coin - ? WHERE username = ?";
+
+    $statement = $connection->prepare($query);
+    $statement->bind_param(
+      "is",
+      $coinValue, $username
+    );
+
+    $statement->execute() ?
+      GetStatement($statement) :
+      GetStatement($statement);
+
+    $statement->close();
+  }
 
   $connection->close();
  ?>

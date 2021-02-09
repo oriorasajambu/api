@@ -9,7 +9,8 @@
     isset($_POST['nama']) &&
     isset($_POST['sekolah']) &&
     isset($_POST['kelas']) &&
-    isset($_POST['email'])
+    isset($_POST['email']) &&
+    isset($_POST['token'])
   ){
 
     $username = $_POST['username'];
@@ -18,12 +19,13 @@
     $sekolah = $_POST['sekolah'];
     $kelas = $_POST['kelas'];
     $email = $_POST['email'];
+    $token = $_POST['token'];
 
-    $query = "INSERT INTO tb_login VALUES (?, ?, current_timestamp(), 'siswa')";
+    $query = "INSERT INTO tb_login VALUES (?, ?, current_timestamp(), 'siswa', ?)";
     $statement = $connection->prepare($query);
     $statement->bind_param(
-      "ss",
-      $username, $password
+      "sss",
+      $username, $password, $token
     );
 
     if($statement->execute()){

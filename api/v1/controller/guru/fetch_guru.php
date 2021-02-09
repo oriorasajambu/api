@@ -12,6 +12,7 @@
     	login.username,
       login.created,
       role,
+      token,
       nama_guru,
       nama_mata_pelajaran,
       universitas,
@@ -22,19 +23,18 @@
     LEFT JOIN tb_guru as guru ON login.username = guru.username
     LEFT JOIN tb_mata_pelajaran as mp ON mp.id_mata_pelajaran = guru.id_mata_pelajaran
     WHERE
-      (login.username LIKE CONCAT('%', ?, '%') OR
-      nama_guru LIKE CONCAT('%', ?, '%') ) AND
+      login.username = ? AND
       login.role = 'guru'";
 
     if($statement = $connection->prepare($query)){
       $statement->bind_param(
-        "ss",
-        $param, $param
+        "s",
+        $param
       );
 
       if($statement->execute()){
         $result = $statement->get_result();
-        GetJSON($result, "data", "list");
+        GetJSON($result, "data");
       }
       else GetStatement($statement);
     }
@@ -46,6 +46,7 @@
       login.username,
       login.created,
       role,
+      token,
       nama_guru,
       nama_mata_pelajaran,
       universitas,

@@ -9,7 +9,7 @@
     $password = $_POST['password'];
 
     $statement = $connection->prepare(
-      "SELECT login.username, created, role, nama_siswa, siswa.coin as coin_siswa, nama_guru, guru.coin as coin_guru
+      "SELECT login.username, created, role, nama_siswa, siswa.coin as coin_siswa, nama_guru, guru.coin as coin_guru, guru.id_mata_pelajaran as id_mata_pelajaran
       FROM `tb_login` as login
       LEFT JOIN tb_siswa as siswa ON siswa.username = login.username
       LEFT JOIN tb_guru as guru ON guru.username = login.username

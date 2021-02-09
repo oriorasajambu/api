@@ -37,7 +37,7 @@
         $code = http_response_code();
         $message = GetMessage($code);
         $array = array(
-          $data => new ArrayObject(),
+          $data => NULL,
           'http_code' => $code,
           'message' => $message,
           'count' => $result->num_rows
@@ -48,7 +48,7 @@
         $code = http_response_code();
         $message = GetMessage($code);
         $array = array(
-          $data => $resultArray,
+          $data => NULL,
           'http_code' => $code,
           'message' => $message,
           'count' => $result->num_rows
@@ -75,4 +75,35 @@
     echo json_encode($result);
   }
 
+  function SendNotification($title, $message, $receiver)
+  {
+    $url = "https://fcm.googleapis.com/fcm/send";
+    $header = [
+        'authorization: key=AAAAFSLFMTs:APA91bFwhAsgY91wLXZRhiRYPk95SA6TaEWGV7-6YeE2Se-nlnSvtgiOAtI2_3gzk586ckiTFqPhn5dBGEe1FyUW3DsbKz-724dufh7IzXjiu3vUnoO5eudvQdlPZzLh5eND6gr80cJX',
+        'content-type: application/json'
+    ];
+
+    $data = [
+        'title' =>$title,
+        'body' => $message
+    ];
+
+    $fcmNotification = [
+        'to'   => $receiver,
+        'data' => $data
+    ];
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 60);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fcmNotification));
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+
+    $result = curl_exec($ch);
+    curl_close($ch);
+
+    echo $result;
+  }
  ?>

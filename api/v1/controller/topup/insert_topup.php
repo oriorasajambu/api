@@ -14,16 +14,18 @@
     $role = $_POST['role'];
     $idr = $_POST['idr'];
     $coin = $_POST['coin'];
+    $no_rekening = $_POST['no_rekening'];
+    $rekening = $_POST['rekening'];
     $bukti_pembayaran = UploadFile();
 
     if($bukti_pembayaran["status"] == 1){
       $statement = $connection->prepare(
         "INSERT INTO tb_topup
-        VALUES (NULL, ?, ?, ?, ?, current_timestamp())"
+        VALUES (NULL, ?, ?, ?, ?, ?, ?, current_timestamp())"
       );
       $statement->bind_param(
-        "siis",
-        $username, $idr, $coin, $bukti_pembayaran['message']
+        "ssisss",
+        $username, $idr, $coin, $no_rekening, $rekening, $bukti_pembayaran['message']
       );
 
       if($statement->execute()){

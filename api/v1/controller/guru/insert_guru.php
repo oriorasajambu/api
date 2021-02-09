@@ -10,7 +10,8 @@
     isset($_POST['nama']) &&
     isset($_POST['universitas']) &&
     isset($_POST['semester']) &&
-    isset($_POST['id_mata_pelajaran'])
+    isset($_POST['id_mata_pelajaran']) &&
+    isset($_POST['token'])
   ){
 
     $username = $_POST['username'];
@@ -19,15 +20,16 @@
     $universitas = $_POST['universitas'];
     $semester = $_POST['semester'];
     $id_mata_pelajaran = $_POST['id_mata_pelajaran'];
+    $token = $_POST['token'];
     $bukti_pembayaran = UploadFile();
 
     if($bukti_pembayaran["status"] == 1){
       $statement = $connection->prepare(
-        "INSERT INTO tb_login VALUES (?, ?, current_timestamp(), 'guru')"
+        "INSERT INTO tb_login VALUES (?, ?, current_timestamp(), 'guru', ?)"
       );
       $statement->bind_param(
-        "ss",
-        $username, $password
+        "sss",
+        $username, $password, $token
       );
 
       if($statement->execute()){
